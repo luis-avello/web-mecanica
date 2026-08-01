@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Mantención Mecánica por KM",
+    "image": "/assets/servicios/1 MANTEN X KM.jpg",
+    "icon": "/assets/servicios/Icono-1.png"
+  },
+  {
+    "name": "Cambio Lubricantes",
+    "image": "/assets/servicios/2 CAMBIO LUBRICANTES.jpg",
+    "icon": "/assets/servicios/Icono-2.png"
+  },
+  {
+    "name": "Servicio Frenos",
+    "image": "/assets/servicios/3 SERVICIO FRENOS.jpg",
+    "icon": "/assets/servicios/Icono-3.png"
+  },
+  {
+    "name": "Suspensión, Tren Delantero, Trasero",
+    "image": "/assets/servicios/4 SUSPENSION, TREN DELANTERO, TRASERO.jpg",
+    "icon": "/assets/servicios/Icono-4.png"
+  },
+  {
+    "name": "Cambio Cremallera Dirección",
+    "image": "/assets/servicios/5 CAMBIO CREMALLERA DIRECCION.jpg",
+    "icon": "/assets/servicios/Icono-5.png"
+  },
+  {
+    "name": "Cambio Embrague",
+    "image": "/assets/servicios/6 CAMBIO EMBRAGUE.jpg",
+    "icon": "/assets/servicios/Icono-5.png"
+  },
+  {
+    "name": "Cambio Homocinéticas, Tricetas",
+    "image": "/assets/servicios/7 CAMBIO HOMOCINETICAS TRICETAS.jpg",
+    "icon": "/assets/servicios/Icono-5.png"
+  },
+  {
+    "name": "Cambio Crucetas de Cardan",
+    "image": "/assets/servicios/8 CAMBIO CRUCETAS CARDAN.jpg",
+    "icon": "/assets/servicios/Icono-5.png"
+  },
+  {
+    "name": "Reparación Diferenciales",
+    "image": "/assets/servicios/9 REPARACION DIFERENCIALES.jpg",
+    "icon": "/assets/servicios/Icono-7-8-9.png"
+  }
+]

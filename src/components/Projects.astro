@@ -1,0 +1,58 @@
+---
+import Section from './Section.astro';
+
+interface Project {
+  name: string;
+  image: string;
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section id="proyectos" class="py-16 md:py-24 bg-black">
+  <div class="section-container">
+    <Section title="Proyectos <span>Offroad</span>" subtitle="Equipamiento offroad fabricado en acero para tu Suzuki" />
+    <!-- Background -->
+    <div class="relative rounded overflow-hidden mb-8 md:mb-10">
+      <div class="absolute inset-0">
+        <img
+          src="/assets/proyectos/Foto fondo seccion Proyectos offroad.jpg"
+          alt=""
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/60"></div>
+      </div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 p-6 md:p-10">
+        <!-- List -->
+        <div class="space-y-6 self-center">
+          {projects.map((project) => (
+            <div class="flex items-center gap-4 group">
+              <svg class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" fill="none" viewBox="0 0 48 48">
+                <circle cx="24" cy="24" r="22" stroke="currentColor" class="text-gray-dark" stroke-width="2"/>
+                <circle cx="24" cy="24" r="14" fill="currentColor" class="text-red opacity-80"/>
+                <path d="M24 10 L24 24 L34 30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span class="text-white text-sm md:text-base font-bold uppercase tracking-wider group-hover:text-red transition-colors">
+                {project.name}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Project Image -->
+        <div class="flex items-center justify-center">
+          <img
+            src="/assets/proyectos/1 kit levante suspencion Vitara.jpg"
+            alt="Kit Levante Suspensión"
+            class="max-w-full h-auto rounded shadow-2xl max-h-64 md:max-h-80 object-contain"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

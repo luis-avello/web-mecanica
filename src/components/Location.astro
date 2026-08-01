@@ -1,0 +1,36 @@
+---
+import Section from './Section.astro';
+import siteData from '../content/site.json';
+---
+
+<section id="ubicacion" class="py-16 md:py-24 bg-black">
+  <div class="section-container">
+    <Section title="Ubicación" />
+    <div class="space-y-6 md:space-y-8">
+      <p class="text-white font-bold uppercase tracking-wider text-sm md:text-base">
+        {siteData.address}
+      </p>
+
+      <!-- Image -->
+      <div class="rounded overflow-hidden">
+        <img
+          src="/assets/ubicacion/camino_melipilla_2000.jpg"
+          alt="Ubicación Mecánica Avello - Camino a Melipilla 2000"
+          class="w-full aspect-[16/9] object-cover"
+        />
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center">
+        <a
+          href={siteData.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block border border-red text-red hover:bg-red hover:text-white text-sm font-bold uppercase tracking-wider px-8 py-3 transition-colors"
+        >
+          Cómo Llegar
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

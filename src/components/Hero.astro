@@ -1,0 +1,68 @@
+---
+import siteData from '../content/site.json';
+---
+
+<section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background Image -->
+  <div class="absolute inset-0">
+    <img
+      src="/assets/inicio/Foto Inicio.png"
+      alt=""
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+    <div class="max-w-2xl">
+      <!-- Logo -->
+      <img
+        src="/assets/inicio/Logotipo-Inicio-Sitio-Web.png"
+        alt="Mecánica Avello"
+        class="h-32 md:h-48 w-auto mb-6 md:mb-8"
+      />
+
+      <!-- Tagline -->
+      <p class="text-red font-bold uppercase tracking-wider text-sm md:text-base mb-3">
+        Servicio Mecánico
+      </p>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-tight mb-4 md:mb-6">
+        Especializado para vehículos<br />
+        <span class="text-red">4x4, SUV y Camionetas</span>
+      </h1>
+      <p class="text-gray text-sm md:text-base leading-relaxed mb-8 md:mb-10 max-w-lg">
+        {siteData.subtitle}
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a
+          href={siteData.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-red hover:bg-red-hover text-white font-bold uppercase tracking-wider text-sm px-8 py-3.5 text-center transition-colors"
+        >
+          Agenda tu revisión hoy mismo
+        </a>
+        <a
+          href="#servicios"
+          class="inline-block border border-white/30 hover:border-white text-white font-bold uppercase tracking-wider text-sm px-8 py-3.5 text-center transition-colors"
+        >
+          Ver Servicios
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+    <a href="#quienes-somos" class="flex flex-col items-center gap-2 text-gray hover:text-white transition-colors">
+      <span class="text-xs uppercase tracking-widest">Scroll</span>
+      <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+    </a>
+  </div>
+</section>

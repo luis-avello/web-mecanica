@@ -1,0 +1,73 @@
+---
+import Section from './Section.astro';
+
+const galleryImages = [
+  '/assets/quienes-somos/Foto-1-Quienes-Somos-.jpg',
+  '/assets/quienes-somos/Foto-2-Quienes-Somos-.jpg',
+  '/assets/quienes-somos/Foto-3-Quienes-Somos-.jpg',
+  '/assets/quienes-somos/Foto-4-Quienes-Somos-.jpg',
+];
+
+let activeIndex = 0;
+---
+
+<section id="quienes-somos" class="py-16 md:py-24 bg-black">
+  <div class="section-container">
+    <Section title="Quiénes <span>Somos</span>" />
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <!-- Text -->
+      <div class="space-y-5">
+        <p class="text-gray leading-relaxed text-sm md:text-base">
+          En Mecánica Avello SPA somos un taller mecánico especializado en mantención preventiva, diagnóstico y reparación de vehículos 4x4, SUV, camionetas y automóviles. Nuestro compromiso es brindar un servicio confiable, transparente y de alta calidad, orientado a mantener tu vehículo en óptimas condiciones y garantizar tu tranquilidad en cada viaje.
+        </p>
+        <p class="text-gray leading-relaxed text-sm md:text-base">
+          Contamos con la experiencia y conocimientos necesarios para trabajar con marcas como Suzuki, Mahindra, Toyota, Nissan y otras, entregando soluciones mecánicas precisas y adaptadas a las necesidades de cada cliente.
+        </p>
+        <p class="text-gray leading-relaxed text-sm md:text-base">
+          Creemos que la confianza se construye con trabajo bien hecho, atención personalizada y una comunicación clara. Por eso, cada vehículo que ingresa a nuestro taller recibe el mismo nivel de dedicación y cuidado que si fuera propio.
+        </p>
+      </div>
+
+      <!-- Gallery -->
+      <div>
+        <!-- Main Image -->
+        <div class="relative aspect-video overflow-hidden rounded mb-4">
+          <img
+            src={galleryImages[activeIndex]}
+            alt={`Mecánica Avello - Foto ${activeIndex + 1}`}
+            class="w-full h-full object-cover transition-opacity duration-300"
+            id="about-main-image"
+          />
+        </div>
+
+        <!-- Dots -->
+        <div class="flex justify-center gap-2" id="about-dots">
+          {galleryImages.map((_, i) => (
+            <button
+              class={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === activeIndex ? 'bg-red w-8' : 'bg-gray-dark hover:bg-gray'}`}
+              onclick={() => {
+                activeIndex = i;
+                document.getElementById('about-main-image').src = galleryImages[i];
+                updateDots(i);
+              }}
+              aria-label={`Foto ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script client:load>
+  function updateDots(index) {
+    const dots = document.querySelectorAll('#about-dots button');
+    dots.forEach((dot, i) => {
+      if (i === index) {
+        dot.className = 'w-2.5 h-2.5 rounded-full transition-all duration-300 bg-red w-8';
+      } else {
+        dot.className = 'w-2.5 h-2.5 rounded-full transition-all duration-300 bg-gray-dark hover:bg-gray';
+      }
+    });
+  }
+</script>

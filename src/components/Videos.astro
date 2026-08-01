@@ -1,0 +1,60 @@
+---
+import Section from './Section.astro';
+
+interface Video {
+  title: string;
+  embedId: string;
+}
+
+interface Props {
+  videos: Video[];
+}
+
+const { videos } = Astro.props;
+import siteData from '../content/site.json';
+---
+
+<section id="videos" class="py-16 md:py-24 bg-black">
+  <div class="section-container">
+    <Section title="Videos" subtitle="Seguí nuestras aventuras 4x4 en RRSS, YouTube, Instagram y TikTok." />
+    <!-- Main Video -->
+    <div class="mb-8">
+      <div class="relative aspect-video rounded overflow-hidden bg-black-lighter">
+        <iframe
+          src={`https://www.youtube.com/embed/${videos[0]?.embedId}`}
+          title={videos[0]?.title}
+          class="absolute inset-0 w-full h-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- Video Thumbnails -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      {videos.slice(1).map((video) => (
+        <div class="relative aspect-video rounded overflow-hidden bg-black-lighter group cursor-pointer">
+          <iframe
+            src={`https://www.youtube.com/embed/${video.embedId}`}
+            title={video.title}
+            class="absolute inset-0 w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      ))}
+    </div>
+
+    <!-- YouTube Link -->
+    <div class="text-center">
+      <a
+        href={siteData.youtube}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block bg-red hover:bg-red-hover text-white text-sm font-bold uppercase tracking-wider px-8 py-3 transition-colors"
+      >
+        Ir a YouTube
+      </a>
+    </div>
+  </div>
+</section>

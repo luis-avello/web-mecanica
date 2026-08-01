@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Lubricantes",
+    "image": "/assets/productos/1 LUBRICANTES.jpg",
+    "icon": "/assets/servicios/Icono-1.png"
+  },
+  {
+    "name": "Filtros",
+    "image": "/assets/productos/2 FILTROS.jpg",
+    "icon": "/assets/servicios/Icono-2.png"
+  },
+  {
+    "name": "Bujías",
+    "image": "/assets/productos/3 BUJIAS.jpg",
+    "icon": "/assets/servicios/Icono-3.png"
+  },
+  {
+    "name": "Correas",
+    "image": "/assets/productos/4 CORREAS.jpg",
+    "icon": "/assets/servicios/Icono-4.png"
+  },
+  {
+    "name": "Frenos",
+    "image": "/assets/productos/5 FRENOS.jpg",
+    "icon": "/assets/servicios/Icono-5.png"
+  },
+  {
+    "name": "Repuestos",
+    "image": "/assets/productos/6 REPUESTOS.jpg",
+    "icon": "/assets/servicios/Icono-6.png"
+  },
+  {
+    "name": "Artículos Ferretería y Construcción",
+    "image": "/assets/productos/7 Articulos ferreteria y construccion.jpg",
+    "icon": "/assets/servicios/Icono-7-8-9.png"
+  }
+]

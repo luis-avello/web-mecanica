@@ -1,17 +1,53 @@
 ---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import Products from '../components/Products.astro';
+import Projects from '../components/Projects.astro';
+import Videos from '../components/Videos.astro';
+import Location from '../components/Location.astro';
+import Contact from '../components/Contact.astro';
 
+import '../styles/global.css';
+
+import servicesData from '../content/services.json';
+import productsData from '../content/products.json';
+import projectsData from '../content/projects.json';
+import videosData from '../content/videos.json';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Mecánica Avello SPA - Servicio mecánico especializado para vehículos 4x4, SUV y camionetas. Mantención preventiva, diagnóstico y reparación en Padre Hurtado, Santiago." />
+    <meta name="keywords" content="mecánica, taller mecánico, 4x4, SUV, camionetas, Suzuki, Mahindra, Toyota, Nissan, mantención preventiva, Padre Hurtado, Melipilla" />
+    <meta property="og:title" content="Mecánica Avello - Servicio Mecánico Especializado 4x4, SUV y Camionetas" />
+    <meta property="og:description" content="Especialistas en mantención preventiva, diagnóstico y reparación de vehículos 4x4, SUV y camionetas." />
+    <meta property="og:type" content="website" />
+    <title>Mecánica Avello - Servicio Mecánico Especializado 4x4, SUV y Camionetas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <Hero />
+      <About />
+      <Services services={servicesData} />
+      <Products products={productsData} />
+      <Projects projects={projectsData} />
+      <Videos videos={videosData} />
+      <Location />
+      <Contact />
+    </main>
+    <Footer />
+  </body>
 </html>

@@ -1,0 +1,51 @@
+---
+import Section from './Section.astro';
+
+interface Product {
+  name: string;
+  image: string;
+  icon: string;
+}
+
+interface Props {
+  products: Product[];
+}
+
+const { products } = Astro.props;
+---
+
+<section id="productos" class="py-16 md:py-24 bg-black">
+  <div class="section-container">
+    <Section title="Productos" />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      {products.map((product) => (
+        <div class="group cursor-pointer">
+          <!-- Image -->
+          <div class="relative overflow-hidden mb-0 aspect-[4/3]">
+            <img
+              src={product.image}
+              alt={product.name}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+          <!-- Label -->
+          <div class="bg-black-lighter border border-white/10 px-4 py-3 flex items-center gap-3 group-hover:border-red/50 transition-colors">
+            <img src={product.icon} alt="" class="w-8 h-8 object-contain opacity-80" />
+            <span class="text-white text-xs md:text-sm font-bold uppercase tracking-wider leading-tight">
+              {product.name}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-8 md:mt-10 text-center">
+      <a
+        href="#contacto"
+        class="inline-block bg-red hover:bg-red-hover text-white text-sm font-bold uppercase tracking-wider px-8 py-3 transition-colors"
+      >
+        Ver Todos los Productos
+      </a>
+    </div>
+  </div>
+</section>
