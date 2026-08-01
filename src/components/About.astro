@@ -7,8 +7,6 @@ const galleryImages = [
   '/assets/quienes-somos/Foto-3-Quienes-Somos-.jpg',
   '/assets/quienes-somos/Foto-4-Quienes-Somos-.jpg',
 ];
-
-let activeIndex = 0;
 ---
 
 <section id="quienes-somos" class="py-16 md:py-24 bg-black">
@@ -33,8 +31,8 @@ let activeIndex = 0;
         <!-- Main Image -->
         <div class="relative aspect-video overflow-hidden rounded mb-4">
           <img
-            src={galleryImages[activeIndex]}
-            alt={`Mecánica Avello - Foto ${activeIndex + 1}`}
+            src={galleryImages[0]}
+            alt="Mecánica Avello - Foto 1"
             class="w-full h-full object-cover transition-opacity duration-300"
             id="about-main-image"
           />
@@ -44,13 +42,9 @@ let activeIndex = 0;
         <div class="flex justify-center gap-2" id="about-dots">
           {galleryImages.map((_, i) => (
             <button
-              class={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === activeIndex ? 'bg-red w-8' : 'bg-gray-dark hover:bg-gray'}`}
-              onclick={() => {
-                activeIndex = i;
-                document.getElementById('about-main-image').src = galleryImages[i];
-                updateDots(i);
-              }}
-              aria-label={`Foto ${i + 1}`}
+              class="w-2.5 h-2.5 rounded-full transition-all duration-300 bg-gray-dark hover:bg-gray"
+              data-index={i}
+              aria-label={'Foto ' + (i + 1)}
             />
           ))}
         </div>
@@ -60,9 +54,21 @@ let activeIndex = 0;
 </section>
 
 <script client:load>
-  function updateDots(index) {
-    const dots = document.querySelectorAll('#about-dots button');
-    dots.forEach((dot, i) => {
+  const images = [
+    '/assets/quienes-somos/Foto-1-Quienes-Somos-.jpg',
+    '/assets/quienes-somos/Foto-2-Quienes-Somos-.jpg',
+    '/assets/quienes-somos/Foto-3-Quienes-Somos-.jpg',
+    '/assets/quienes-somos/Foto-4-Quienes-Somos-.jpg',
+  ];
+  const mainImage = document.getElementById('about-main-image');
+  const dotsContainer = document.getElementById('about-dots');
+  let currentIndex = 0;
+
+  function updateGallery(index) {
+    currentIndex = index;
+    mainImage.src = images[index];
+    mainImage.alt = 'Mecánica Avello - Foto ' + (index + 1);
+    dotsContainer.querySelectorAll('button').forEach((dot, i) => {
       if (i === index) {
         dot.className = 'w-2.5 h-2.5 rounded-full transition-all duration-300 bg-red w-8';
       } else {
@@ -70,4 +76,11 @@ let activeIndex = 0;
       }
     });
   }
+
+  dotsContainer.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+      const index = parseInt(e.target.dataset.index);
+      updateGallery(index);
+    }
+  });
 </script>
