@@ -1,43 +1,91 @@
-# Astro Starter Kit: Minimal
+# Mecánica Avello SPA
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Single-page website for a mechanic workshop specializing in 4x4, SUV, and pickup trucks.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Live site**: http://localhost:4321 (dev server)
 
 ## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
 
 ```text
 /
 ├── public/
+│   └── assets/              # Images (direct URL access)
+│       ├── logo/
+│       ├── quienes-somos/
+│       ├── servicios/
+│       ├── productos/
+│       ├── proyectos/
+│       └── ubicacion/
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── components/          # Astro components
+│   │   ├── Header.astro
+│   │   ├── Footer.astro
+│   │   ├── Hero.astro
+│   │   ├── Section.astro
+│   │   ├── About.astro
+│   │   ├── Services.astro
+│   │   ├── Products.astro
+│   │   ├── Projects.astro
+│   │   ├── Videos.astro
+│   │   ├── Location.astro
+│   │   └── Contact.astro
+│   ├── content/             # Externalized content (JSON/MD)
+│   │   ├── site.json
+│   │   ├── about.md
+│   │   ├── services.json
+│   │   ├── products.json
+│   │   ├── projects.json
+│   │   └── videos.json
+│   ├── pages/
+│   │   └── index.astro
+│   └── styles/
+│       └── global.css
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
 ## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
+All commands are run from the root of the project:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command                     | Action                                           |
+| --------------------------- | ------------------------------------------------ |
+| `npm install`               | Installs dependencies                            |
+| `astro dev --background`    | Starts local dev server at `localhost:4321`      |
+| `astro dev status`          | Check if dev server is running                   |
+| `astro dev logs`            | View dev server logs                             |
+| `astro dev stop`            | Stop dev server                                  |
+| `npm run build`             | Build production site to `./dist/`               |
+| `npm run preview`           | Preview build locally                            |
 
-## 👀 Want to learn more?
+## 📝 Content Management
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Update site info
+Edit `src/content/site.json` — phone, social links, address.
+
+### Update "Quiénes Somos"
+Edit `src/content/about.md` — markdown text. Images are in `public/assets/quienes-somos/`.
+
+### Update Services
+Edit `src/content/services.json` — add/edit services with name, image path, icon path.
+
+### Update Products
+Edit `src/content/products.json` — add/edit products with name, image path, icon path.
+
+### Update Projects
+Edit `src/content/projects.json` — add/edit projects with name and image path.
+
+### Update Videos
+Edit `src/content/videos.json` — update `embedId` with actual YouTube video IDs.
+
+## 🎨 Design
+
+- **Framework**: Astro v7.1.6 + Tailwind CSS v4
+- **Theme**: Dark (#0A0A0A background, #E31E24 red accent, white text)
+- **Sections**: inicio, quienes-somos, servicios, productos, proyectos, videos, ubicación, contacto
+
+## ⚠️ Important Notes
+
+- **No template literals** in `<script client:load>` — use string concatenation (`'text ' + var`)
+- **Mobile menu** is outside `<header>` with `z-[9999]` and uses `data-menu-open` attribute
+- **Swipe gestures** use mousedown/mouseup + touchstart/touchend with window listeners
+- **Image assets** go in `public/assets/` for direct URL access (not `src/assets/`)
