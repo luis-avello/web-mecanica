@@ -1,9 +1,0 @@
----
-title: Quiénes Somos
----
-
-En Mecánica Avello SPA somos un taller mecánico especializado en mantención preventiva, diagnóstico y reparación de vehículos 4x4, SUV, camionetas y automóviles. Nuestro compromiso es brindar un servicio confiable, transparente y de alta calidad, orientado a mantener tu vehículo en óptimas condiciones y garantizar tu tranquilidad en cada viaje.
-
-Contamos con la experiencia y conocimientos necesarios para trabajar con marcas como Suzuki, Mahindra, Toyota, Nissan y otras, entregando soluciones mecánicas precisas y adaptadas a las necesidades de cada cliente.
-
-Creemos que la confianza se construye con trabajo bien hecho, atención personalizada y una comunicación clara. Por eso, cada vehículo que ingresa a nuestro taller recibe el mismo nivel de dedicación y cuidado que si fuera propio.

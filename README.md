@@ -2,7 +2,7 @@
 
 Single-page website for a mechanic workshop specializing in 4x4, SUV, and pickup trucks.
 
-**Live site**: http://localhost:4321 (dev server)
+**Live site**: https://mecanicaavello.cl (production server)
 
 ## 🚀 Project Structure
 
@@ -47,34 +47,40 @@ Single-page website for a mechanic workshop specializing in 4x4, SUV, and pickup
 
 All commands are run from the root of the project:
 
-| Command                     | Action                                           |
-| --------------------------- | ------------------------------------------------ |
-| `npm install`               | Installs dependencies                            |
-| `astro dev --background`    | Starts local dev server at `localhost:4321`      |
-| `astro dev status`          | Check if dev server is running                   |
-| `astro dev logs`            | View dev server logs                             |
-| `astro dev stop`            | Stop dev server                                  |
-| `npm run build`             | Build production site to `./dist/`               |
-| `npm run preview`           | Preview build locally                            |
+| Command                  | Action                                      |
+| ------------------------ | ------------------------------------------- |
+| `npm install`            | Installs dependencies                       |
+| `astro dev --background` | Starts local dev server at `localhost:4321` |
+| `astro dev status`       | Check if dev server is running              |
+| `astro dev logs`         | View dev server logs                        |
+| `astro dev stop`         | Stop dev server                             |
+| `npm run build`          | Build production site to `./dist/`          |
+| `npm run preview`        | Preview build locally                       |
 
 ## 📝 Content Management
 
 ### Update site info
+
 Edit `src/content/site.json` — phone, social links, address.
 
 ### Update "Quiénes Somos"
+
 Edit `src/content/about.md` — markdown text. Images are in `public/assets/quienes-somos/`.
 
 ### Update Services
+
 Edit `src/content/services.json` — add/edit services with name, image path, icon path.
 
 ### Update Products
+
 Edit `src/content/products.json` — add/edit products with name, image path, icon path.
 
 ### Update Projects
+
 Edit `src/content/projects.json` — add/edit projects with name and image path.
 
 ### Update Videos
+
 Edit `src/content/videos.json` — update `embedId` with actual YouTube video IDs.
 
 ## 🎨 Design

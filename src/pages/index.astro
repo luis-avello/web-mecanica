@@ -18,6 +18,7 @@ import servicesData from '../content/services.json';
 import productsData from '../content/products.json';
 import projectsData from '../content/projects.json';
 import videosData from '../content/videos.json';
+import aboutData from '../content/about.json';
 ---
 
 <!doctype html>
@@ -44,7 +45,7 @@ import videosData from '../content/videos.json';
     <Header />
     <main>
       <Hero />
-      <About />
+      <About title={aboutData.title} paragraphs={aboutData.paragraphs} galleryImages={aboutData.galleryImages} />
       <Services services={servicesData} />
       <Products products={productsData} />
       <Projects projects={projectsData} />
