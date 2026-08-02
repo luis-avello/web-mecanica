@@ -9,7 +9,8 @@ import Projects from '../components/Projects.astro';
 import Videos from '../components/Videos.astro';
 import Location from '../components/Location.astro';
 import Contact from '../components/Contact.astro';
-import Analytics from '@vercel/analytics/astro'
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 import '../styles/global.css';
 
@@ -37,6 +38,7 @@ import videosData from '../content/videos.json';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <Analytics />
+    <SpeedInsights />
   </head>
   <body>
     <Header />
