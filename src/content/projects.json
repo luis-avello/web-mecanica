@@ -1,18 +1,26 @@
-[
-  {
-    "name": "Kit Levante Suspensión Suzuki",
-    "image": "/assets/proyectos/1 kit levante suspencion Vitara.jpg"
-  },
-  {
-    "name": "Desplazadores de Ruedas en Acero",
-    "image": "/assets/proyectos/2 Desplazadoes en acero.jpg"
-  },
-  {
-    "name": "Placas Protectoras de Bajos Suzuki",
-    "image": "/assets/proyectos/3 Placas protectoras Vitara.jpg"
-  },
-  {
-    "name": "Trabajos en Torno y Soldadura",
-    "image": "/assets/proyectos/4 Trabajos torno y soldadura.jpg"
-  }
-]
+{
+  "projects": [
+    {
+      "name": "Kit Levante Suspensión Suzuki",
+      "icon": "/assets/proyectos/Icono-1.png"
+    },
+    {
+      "name": "Desplazadores de Ruedas en Acero",
+      "icon": "/assets/proyectos/Icono-2.png"
+    },
+    {
+      "name": "Placas Protectoras de Bajos Suzuki",
+      "icon": "/assets/proyectos/Icono-3.png"
+    },
+    {
+      "name": "Trabajos en Torno y Soldadura",
+      "icon": "/assets/proyectos/Icono-4.png"
+    }
+  ],
+  "galleryImages": [
+    "/assets/proyectos/1 kit levante suspencion Vitara.jpg",
+    "/assets/proyectos/2 Desplazadoes en acero.jpg",
+    "/assets/proyectos/3 Placas protectoras Vitara.jpg",
+    "/assets/proyectos/4 Trabajos torno y soldadura.jpg"
+  ]
+}
