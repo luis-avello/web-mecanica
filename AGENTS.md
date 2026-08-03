@@ -35,7 +35,17 @@ Single-page website for "Mecánica Avello SPA" — mechanic workshop specializin
 
 2. **Use `client:load`** for interactive components that need immediate client-side JS.
 
-3. **For state toggles**, use `data-*` attributes on parent elements + CSS attribute selectors instead of class manipulation:
+3. **Wrap all `client:load` scripts in an IIFE** to avoid global scope collisions between components:
+   ```astro
+   <script client:load>
+   (function() {
+     const section = document.getElementById('...');
+     // ... all logic inside the IIFE
+   })();
+   </script>
+   ```
+
+4. **For state toggles**, use `data-*` attributes on parent elements + CSS attribute selectors instead of class manipulation:
    ```html
    <header data-menu-open="false">...</header>
    <div id="mobile-menu">...</div>
@@ -45,9 +55,9 @@ Single-page website for "Mecánica Avello SPA" — mechanic workshop specializin
    header[data-menu-open="true"] ~ #mobile-menu { transform: translateX(0); }
    ```
 
-4. **For mobile menus**, position the menu OUTSIDE the `<header>` element and use sibling selector (`~`) in CSS. Set `z-[9999]` to ensure it's above all content.
+5. **For mobile menus**, position the menu OUTSIDE the `<header>` element and use sibling selector (`~`) in CSS. Set `z-[9999]` to ensure it's above all content.
 
-5. **For swipe/drag gestures**, use `mousedown`/`mouseup` on the element and `touchstart`/`touchend` on the element, but listen for `mouseup`/`touchend` on `window` so releases outside the element still register.
+6. **For swipe/drag gestures**, use `mousedown`/`mouseup` on the element and `touchstart`/`touchend` on the element, but listen for `mouseup`/`touchend` on `window` so releases outside the element still register.
 
 ## Documentation
 

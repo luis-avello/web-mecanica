@@ -92,6 +92,7 @@ Edit `src/content/videos.json` — update `embedId` with actual YouTube video ID
 ## ⚠️ Important Notes
 
 - **No template literals** in `<script client:load>` — use string concatenation (`'text ' + var`)
+- **Wrap all `client:load` scripts in an IIFE** to avoid global scope collisions between components
 - **Mobile menu** is outside `<header>` with `z-[9999]` and uses `data-menu-open` attribute
 - **Swipe gestures** use mousedown/mouseup + touchstart/touchend with window listeners
 - **Image assets** go in `public/assets/` for direct URL access (not `src/assets/`)
