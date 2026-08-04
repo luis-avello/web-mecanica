@@ -59,7 +59,7 @@ const { projects, galleryImages } = Astro.props;
 
           <!-- Dots -->
           <div class="flex justify-center gap-2" id="projects-dots">
-            {projects.map((_, i) => (
+            {galleryImages.map((_, i) => (
               <button
                 class="w-2.5 h-2.5 rounded-full transition-all duration-300 bg-gray-dark hover:bg-gray"
                 data-index={i}

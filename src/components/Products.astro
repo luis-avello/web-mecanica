@@ -1,5 +1,6 @@
 ---
 import Section from './Section.astro';
+import siteData from '../content/site.json';
 
 interface Product {
   name: string;
@@ -41,10 +42,10 @@ const { products } = Astro.props;
 
     <div class="mt-8 md:mt-10 text-center">
       <a
-        href="#contacto"
+        href={siteData.whatsapp}
         class="inline-block bg-red hover:bg-red-hover text-white text-sm font-bold uppercase tracking-wider px-8 py-3 transition-colors"
       >
-        Ver Todos los Productos
+        Contáctanos
       </a>
     </div>
   </div>
