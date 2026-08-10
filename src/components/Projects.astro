@@ -23,6 +23,10 @@ const { projects, galleryImages } = Astro.props;
         <img
           src="/assets/proyectos/Foto fondo seccion Proyectos offroad.jpg"
           alt=""
+          aria-hidden="true"
+          role="presentation"
+          loading="lazy"
+          decoding="async"
           class="w-full h-full object-cover"
         />
         <div class="absolute inset-0 bg-black/80"></div>
@@ -36,6 +40,8 @@ const { projects, galleryImages } = Astro.props;
               <img
                 src={project.icon}
                 alt={project.name}
+                loading="lazy"
+                decoding="async"
                 class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 rounded"
               />
               <span class="text-white text-sm md:text-base font-bold uppercase tracking-wider group-hover:text-red transition-colors">
@@ -52,6 +58,8 @@ const { projects, galleryImages } = Astro.props;
             <img
               src={galleryImages[0] || ''}
               alt="Proyecto 1"
+              loading="lazy"
+              decoding="async"
               class="w-full h-full object-cover transition-opacity duration-300 select-none"
               id="projects-main-image"
             />

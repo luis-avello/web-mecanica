@@ -28,6 +28,8 @@ const { title = 'Quiénes Somos', paragraphs = [], galleryImages = [] } = Astro.
           <img
             src={galleryImages[0] || ''}
             alt="Mecánica Avello - Foto 1"
+            loading="lazy"
+            decoding="async"
             class="w-full h-full object-cover transition-opacity duration-300 select-none"
             id="about-main-image"
           />

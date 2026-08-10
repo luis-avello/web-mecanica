@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mecanicaavello.cl/sitemap-index.xml

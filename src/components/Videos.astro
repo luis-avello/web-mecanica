@@ -19,28 +19,46 @@ import siteData from '../content/site.json';
     <Section title="Videos" subtitle="Sigue nuestras aventuras 4x4 en RRSS, YouTube, Instagram y TikTok." />
     <!-- Main Video -->
     <div class="mb-8">
-      <div class="relative aspect-video rounded overflow-hidden bg-black-lighter">
-        <iframe
-          src={`https://www.youtube.com/embed/${videos[0]?.embedId}`}
-          title={videos[0]?.title}
-          class="absolute inset-0 w-full h-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+      <div
+        class="relative aspect-video rounded overflow-hidden bg-black-lighter video-lazy cursor-pointer group"
+        data-embed={videos[0]?.embedId}
+        data-title={videos[0]?.title}
+      >
+        <img
+          src={'https://i.ytimg.com/vi/' + (videos[0]?.embedId || '') + '/hqdefault.jpg'}
+          alt={videos[0]?.title || 'Video Mecánica Avello'}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/60 transition-colors">
+          <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
       </div>
     </div>
 
     <!-- Video Thumbnails -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
       {videos.slice(1).map((video) => (
-        <div class="relative aspect-video rounded overflow-hidden bg-black-lighter group cursor-pointer">
-          <iframe
-            src={`https://www.youtube.com/embed/${video.embedId}`}
-            title={video.title}
-            class="absolute inset-0 w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+        <div
+          class="relative aspect-video rounded overflow-hidden bg-black-lighter video-lazy cursor-pointer group"
+          data-embed={video.embedId}
+          data-title={video.title}
+        >
+          <img
+            src={'https://i.ytimg.com/vi/' + video.embedId + '/hqdefault.jpg'}
+            alt={video.title}
+            loading="lazy"
+            decoding="async"
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/60 transition-colors">
+            <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
         </div>
       ))}
     </div>
@@ -58,3 +76,24 @@ import siteData from '../content/site.json';
     </div>
   </div>
 </section>
+
+<script client:load>
+  (function() {
+    document.querySelectorAll('.video-lazy').forEach(function(container) {
+      container.addEventListener('click', function() {
+        if (container.querySelector('iframe')) return;
+        var embed = container.dataset.embed;
+        var title = container.dataset.title || '';
+        if (!embed) return;
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/' + embed + '?autoplay=1&rel=0';
+        iframe.title = title;
+        iframe.className = 'absolute inset-0 w-full h-full';
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('loading', 'lazy');
+        container.appendChild(iframe);
+      });
+    });
+  })();
+</script>
