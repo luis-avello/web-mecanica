@@ -19,7 +19,7 @@ Single-page website for "Mecánica Avello SPA" — mechanic workshop specializin
 - **Assets**: Images in `public/assets/` for direct URL access
 - **YouTube**: https://www.youtube.com/@mecanicaavello4x4
 - **WhatsApp**: +569 7213 5168 → https://wa.me/56972135168
-- **Instagram**: @mecanicaavello
+- **Instagram**: @mecanicaavello_canoavello
 - **Email**: mecanica.avello@gmail.com
 - **Address**: Camino a Melipilla 2000, Bodega 2, Padre Hurtado, Santiago, Chile
 

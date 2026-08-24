@@ -1,140 +1,83 @@
 # Mejoras del Proyecto — Mecánica Avello SPA
 
-Lista de mejoras identificadas, organizadas por prioridad. Implementar en etapas posteriores.
+Lista de mejoras pendientes, organizadas por prioridad. Los ítems ya implementados fueron removidos de esta lista (ver historial en git).
 
 ---
 
 ## Críticas (afectan funcionalidad o rendimiento)
 
-### 1. Videos sin lazy loading
+### 1. Assets duplicados
 
-**Archivo**: `src/components/Videos.astro` (lineas 23-44)
+**Directorios**: `src/assets/` (69 MB) y `public/assets/` (85 MB)
 
-Los 4 iframes de YouTube se cargan simultaneamente al inicializar la pagina, afectando el LCP y el uso de datos del usuario.
+Ambos directorios contienen contenido solapado. Solo se necesitan en `public/` ya que todas las imagenes se referencian como `/assets/...`. `src/assets/` tiene 2 archivos únicos que el sitio no usa: `logo sticker.jpg` y `logo vectorizado.svg`.
 
-**Solución**: Agregar `loading="lazy"` y `decoding="async"` a todos los iframes. Idealmente, usar un thumbnail clickeable que cargue el iframe solo al hacer click (lazy-load real con placeholder).
-
----
-
-### 2. Assets duplicados
-
-**Directorios**: `src/assets/` y `public/assets/`
-
-Ambos directorios contienen el mismo contenido. Solo se necesitan en `public/` ya que todas las imagenes se referencian como `/assets/...`.
-
-**Solución**: Eliminar `src/assets/` o mover las imagenes a `public/assets/` y borrar el duplicado.
-
----
-
-### 3. Iconos duplicados en servicios.json
-
-**Archivo**: `src/content/services.json` (lineas 25-41)
-
-Los items `Cambio Cremallera Dirección`, `Cambio Embrague`, `Cambio Homocinéticas, Tricetas` y `Cambio Crucetas de Cardan` comparten el mismo icono `Icono-5.png`. Parece un error de data.
-
-**Solución**: Buscar o crear iconos individuales para cada servicio. Actualizar `services.json`.
-
----
-
-### 4. Hero: imagen de fondo sin `loading="lazy"`
-
-**Archivo**: `src/components/Hero.astro` (linea 9)
-
-La imagen de fondo del hero se carga como `<img>` normal sin `loading="lazy"`. Como es la primera imagen visible, puede competir con el LCP.
-
-**Solución**: Considerar usar `<link rel="preload">` para la imagen del hero en el `<head>` en lugar de `<img>`, o mantenerla como esta si es la LCP image. Si se mantiene como `<img>`, considerar `fetchpriority="high"`.
+**Solución**: Verificar que ninguna ruta use `src/assets/` antes de borrar el directorio.
 
 ---
 
 ## Importantes (mejoran UX, SEO o accesibilidad)
 
-### 6. Google Fonts: `&` sin escapar en HTML
-
-**Archivo**: `src/pages/index.astro` (linea 40)
-
-```html
-<!-- ACTUAL -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-<!-- CORREGIDO -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-```
-
----
-
-### 6. SEO: Falta robots.txt y sitemap
-
-**Archivo**: `astro.config.mjs`
-
-No hay configuracion de SEO. No hay sitemap ni robots.txt.
-
-**Solución**: Agregar `@astrojs/sitemap` integration al config y crear `public/robots.txt`.
-
----
-
-### 7. Footer: `new Date().getFullYear()` en build time
+### 2. Footer: `new Date().getFullYear()` en build time
 
 **Archivo**: `src/components/Footer.astro` (linea 60)
 
-El copyright se calcula en build time, no en runtime. Si el site se build en enero 2026, el footer dira 2026 incluso en 2027.
+El copyright se calcula en build time, no en runtime (no existe bloque `<script>` en el componente). Si el site se build en enero 2026, el footer dira 2026 incluso en 2027.
 
-**Solución**: Usar `set:html` con un componente que calcule la fecha en el cliente, o hardcodear el ano correcto.
-
----
-
-### 8. Header: Logo con espacio en filename
-
-**Archivo**: `src/components/Header.astro` (linea 21)
-
-`/assets/logo sin fondo.png` tiene espacio en el filename. Funciona pero es frágil y puede causar problemas en algunos servidores/configs.
-
-**Solución**: Renombrar a `logo-sin-fondo.png` en `public/assets/` y `public/assets/inicio/`, actualizar referencias en `Header.astro` y `Footer.astro`.
+**Solución**: Pequeño script `client:load` que actualice el año en runtime, o hardcodear el año y documentarlo.
 
 ---
 
-### 9. Hero: imagen decorativa sin `aria-hidden`
+### 3. Archivos con espacios en el filename
 
-**Archivo**: `src/components/Hero.astro` (linea 9)
+**Alcance verificado** (no solo el logo):
 
-La imagen de fondo decorativa tiene `alt=""` pero no tiene `aria-hidden="true"` ni `role="presentation"`. Los lectores de pantalla podrian leerla como imagen decorativa sin contexto.
+- `public/assets/logo sin fondo.webp` + `.png` → `Header.astro:21`, `Footer.astro:10`
+- `public/assets/inicio/Foto Inicio.webp` → `Hero.astro:9`
+- `public/assets/quienes-somos/tema quienes somos_1..5.jpg` → `about.json` (`galleryImages`)
+- `public/assets/proyectos/5 Foto Nomade y fondo.jpg` + 4 más → `projects.json` (`galleryImages`)
+- `public/assets/proyectos/Foto fondo seccion Proyectos offroad.jpg` → `Projects.astro:24`
 
-**Solución**: Agregar `aria-hidden="true"` y `role="presentation"` al `<img>`.
+Funciona, pero es frágil y puede causar problemas en algunos servidores/configs.
+
+**Solución**: Renombrar a kebab-case (`logo-sin-fondo.webp`, `foto-inicio.webp`, `tema-quienes-somos-1.jpg`, etc.) y actualizar referencias en `Header.astro`, `Footer.astro`, `Hero.astro`, `Projects.astro`, `about.json` y `projects.json`.
 
 ---
 
 ## Code Quality (limpieza y mantenibilidad)
 
-### 10. Duplicacion masiva: Scripts de carrusel
+### 4. Duplicación masiva: Scripts de carrusel (~70 líneas)
 
-**Archivos**: `src/components/About.astro` (lineas 51-121) y `src/components/Projects.astro` (lineas 76-146)
+**Archivos**: `src/components/About.astro` (lineas 53-124) y `src/components/Projects.astro` (lineas 84-155)
 
-El script del carrusel (click en dots + swipe/drag) esta duplicado casi identico (~70 lineas cada uno).
+El script del carrusel (click en dots + swipe/drag) esta duplicado casi identico.
 
 **Solución**: Extraer a un componente reutilizable `Gallery.astro` que reciba `images`, `mainImageId`, `dotsId` como props.
 
 ---
 
-### 11. Duplicacion: Services.astro y Products.astro
+### 5. Duplicación: Services.astro y Products.astro
 
 **Archivos**: `src/components/Services.astro` y `src/components/Products.astro`
 
-Son estructuralmente identicos (mismo grid, mismo hover, mismo CTA). Solo cambian los nombres de props.
+Son estructuralmente identicos (mismo grid, mismo hover, mismo CTA "Contáctanos"). Solo cambian los nombres de props.
 
 **Solución**: Crear un componente `CardGrid.astro` reutilizable que reciba `items`, `title`, `ctaText`, `ctaHref` como props.
 
 ---
 
-### 12. Iconos SVG duplicados
+### 6. Iconos SVG duplicados
 
-Los SVGs de WhatsApp aparecen 3 veces (Header desktop, Header mobile, Hero) con el mismo path de 40+ lineas.
+El SVG de WhatsApp (path de 40+ lineas) aparece 3 veces identico:
 
-**Archivos**: `src/components/Header.astro` (lineas 40-42, 83-85), `src/components/Hero.astro` (lineas 63-65)
+- `src/components/Header.astro` (lineas 40-42 y 83-85)
+- `src/components/Hero.astro` (lineas 73-75)
 
-**Solución**: Extraer a un componente `IconWhatsApp.astro` reutilizable. Lo mismo para iconos de telefono, email, Instagram, calendario.
+**Solución**: Extraer a un componente `IconWhatsApp.astro` reutilizable. Lo mismo para iconos de telefono, email, Instagram (en `Contact.astro`).
 
 ---
 
-### 13. No hay `src/layouts/`
+### 7. No hay `src/layouts/`
 
 **Archivo**: `src/pages/index.astro`
 
@@ -146,61 +89,49 @@ Todo esta hardcodeado en `index.astro`. Si se agrega una segunda pagina, se dupl
 
 ## Menores (pulido y detalles)
 
-### 14. About.astro: `data-images` expone datos internos en el DOM
+### 8. About.astro y Projects.astro: `data-images` expone datos internos en el DOM
 
-**Archivo**: `src/components/About.astro` (linea 13)
+**Archivos**: `src/components/About.astro` (linea 13) y `src/components/Projects.astro` (linea 17)
 
-`JSON.stringify(galleryImages)` se inyecta directamente en el DOM. Si una imagen tiene comillas o caracteres especiales, podria romper el JSON.
+`JSON.stringify(galleryImages)` se inyecta directamente en un atributo `data-images` del DOM. Si una imagen tiene comillas o caracteres especiales, podria romper el JSON.
 
-**Solución**: Usar `JSON.stringify` con escape seguro, o pasar las imagenes via un `<script type="application/json">` oculto.
-
----
-
-### 15. Projects.astro: Dots usan `projects.map` en lugar de `galleryImages.map`
-
-**Archivo**: `src/components/Projects.astro` (linea 62)
-
-Los dots se generan con `projects.map((_, i)` pero deberian ser `galleryImages.map` para que coincida si hay mas imagenes que proyectos.
-
-**Solución**: Cambiar a `galleryImages.map((_, i) => ...`.
+**Solución**: Leer las imagenes directamente del DOM, o pasarlas via un `<script type="application/json">` oculto.
 
 ---
 
-### 16. Links externos sin `referrerpolicy`
+### 9. Links externos sin `referrerpolicy`
 
-**Archivos**: `src/components/Header.astro`, `src/components/Hero.astro`, `src/components/Videos.astro`
+**Archivos**: `Header.astro`, `Hero.astro`, `Footer.astro`, `Contact.astro`, `Location.astro`, `Videos.astro`
 
-Los links externos a WhatsApp/Youtube/Instagram no tienen `referrerpolicy="no-referrer-when-downgrade"`.
+Los 9 links con `target="_blank"` ya llevan `rel="noopener noreferrer"`, pero ninguno tiene `referrerpolicy` (0 ocurrencias en `src/`).
 
-**Solución**: Agregar `referrerpolicy="no-referrer-when-downgrade"` a todos los links con `target="_blank"`.
+**Solución**: Agregar `referrerpolicy="no-referrer-when-downgrade"` a todos los links externos (WhatsApp, YouTube, Instagram, Google Maps).
 
 ---
 
-### 17. Seccion Ubicación sin subtitle
+### 10. Sección Ubicación sin subtitle
 
 **Archivo**: `src/components/Location.astro` (linea 8)
 
 `<Section title="Ubicación" />` sin subtitle, mientras todas las otras secciones tienen.
 
-**Solución**: Agregar un subtitle descriptivo o mantener la consistencia con las otras secciones.
+**Solución**: Agregar un subtitle descriptivo (Camino a Melipilla, Padre Hurtado) o mantener la consistencia con las otras secciones.
 
 ---
 
-### 18. No hay `src/env.d.ts`
+### 11. No hay `src/env.d.ts`
 
 Astro normalmente lo genera automaticamente, pero si se agregan tipos de assets personalizados, podria ser necesario.
 
-**Solución**: Crear `src/env.d.ts` si se necesitan tipos custom para assets o si se planifica expandir el proyecto a multiples paginas.
+**Solución**: Crear `src/env.d.ts` con `/// <reference types="astro/client" />` si se planifica expandir el proyecto a multiples paginas.
 
 ---
 
 ## Resumen de impacto
 
-| Prioridad | Cantidad | Tiempo estimado |
-|-----------|----------|-----------------|
-| Críticas | 3 | ~30 min |
-| Importantes | 6 | ~1.5-2 horas |
-| Code Quality | 4 | ~1-2 horas |
-| Menores | 5 | ~30 min |
-
-**Total estimado**: 3 - 4.5 horas
+| Prioridad | Cantidad |
+|-----------|----------|
+| Críticas | 1 |
+| Importantes | 2 |
+| Code Quality | 4 |
+| Menores | 4 |

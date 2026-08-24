@@ -117,39 +117,41 @@ const navItems = [
 </style>
 
 <script client:load>
-  const header = document.getElementById('header');
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuLine1 = document.getElementById('menu-line-1');
-  const menuLine2 = document.getElementById('menu-line-2');
-  const menuLine3 = document.getElementById('menu-line-3');
+  (function() {
+    const header = document.getElementById('header');
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuLine1 = document.getElementById('menu-line-1');
+    const menuLine2 = document.getElementById('menu-line-2');
+    const menuLine3 = document.getElementById('menu-line-3');
 
-  // Scroll effect
-  let lastScroll = 0;
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
-    if (currentScroll > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-    lastScroll = currentScroll;
-  });
-
-  // Mobile menu toggle
-  menuToggle.addEventListener('click', () => {
-    const isOpen = header.getAttribute('data-menu-open') === 'true';
-    header.setAttribute('data-menu-open', String(!isOpen));
-    menuToggle.classList.toggle('active');
-    document.body.style.overflow = isOpen ? '' : 'hidden';
-  });
-
-  // Close mobile menu on link click
-  document.querySelectorAll('.mobile-nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      header.setAttribute('data-menu-open', 'false');
-      menuToggle.classList.remove('active');
-      document.body.style.overflow = '';
+    // Scroll effect
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+      if (currentScroll > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      lastScroll = currentScroll;
     });
-  });
+
+    // Mobile menu toggle
+    menuToggle.addEventListener('click', () => {
+      const isOpen = header.getAttribute('data-menu-open') === 'true';
+      header.setAttribute('data-menu-open', String(!isOpen));
+      menuToggle.classList.toggle('active');
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+      link.addEventListener('click', () => {
+        header.setAttribute('data-menu-open', 'false');
+        menuToggle.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  })();
 </script>

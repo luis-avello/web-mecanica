@@ -10,7 +10,8 @@ Single-page website for a mechanic workshop specializing in 4x4, SUV, and pickup
 /
 ├── public/
 │   └── assets/              # Images (direct URL access)
-│       ├── logo/
+│       ├── logo sin fondo.webp  # + other logo files at root
+│       ├── inicio/
 │       ├── quienes-somos/
 │       ├── servicios/
 │       ├── productos/
@@ -29,9 +30,9 @@ Single-page website for a mechanic workshop specializing in 4x4, SUV, and pickup
 │   │   ├── Videos.astro
 │   │   ├── Location.astro
 │   │   └── Contact.astro
-│   ├── content/             # Externalized content (JSON/MD)
+│   ├── content/             # Externalized content (JSON)
 │   │   ├── site.json
-│   │   ├── about.md
+│   │   ├── about.json
 │   │   ├── services.json
 │   │   ├── products.json
 │   │   ├── projects.json
@@ -65,7 +66,7 @@ Edit `src/content/site.json` — phone, social links, address.
 
 ### Update "Quiénes Somos"
 
-Edit `src/content/about.md` — markdown text. Images are in `public/assets/quienes-somos/`.
+Edit `src/content/about.json` — `title`, `paragraphs`, `galleryImages`. Images are in `public/assets/quienes-somos/`.
 
 ### Update Services
 
@@ -88,6 +89,7 @@ Edit `src/content/videos.json` — update `embedId` with actual YouTube video ID
 - **Framework**: Astro v7.1.6 + Tailwind CSS v4
 - **Theme**: Dark (#0A0A0A background, #E31E24 red accent, white text)
 - **Sections**: inicio, quienes-somos, servicios, productos, proyectos, videos, ubicación, contacto
+- **Analytics**: @vercel/analytics + @vercel/speed-insights
 
 ## ⚠️ Important Notes
 
