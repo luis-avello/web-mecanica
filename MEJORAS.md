@@ -66,18 +66,7 @@ Son estructuralmente identicos (mismo grid, mismo hover, mismo CTA "Contáctanos
 
 ---
 
-### 6. Iconos SVG duplicados
-
-El SVG de WhatsApp (path de 40+ lineas) aparece 3 veces identico:
-
-- `src/components/Header.astro` (lineas 40-42 y 83-85)
-- `src/components/Hero.astro` (lineas 73-75)
-
-**Solución**: Extraer a un componente `IconWhatsApp.astro` reutilizable. Lo mismo para iconos de telefono, email, Instagram (en `Contact.astro`).
-
----
-
-### 7. No hay `src/layouts/` + JSON-LD y meta de home hardcodeados
+### 6. No hay `src/layouts/` + JSON-LD y meta de home hardcodeados
 
 **Archivos**: `src/pages/index.astro` (lineas 24-81) y `src/content/site.json`
 
@@ -94,7 +83,7 @@ Importante: ~90% del head es especifico de la home (title, description, canonica
 
 ## Menores (pulido y detalles)
 
-### 8. About.astro y Projects.astro: `data-images` expone datos internos en el DOM
+### 7. About.astro y Projects.astro: `data-images` expone datos internos en el DOM
 
 **Archivos**: `src/components/About.astro` (linea 13) y `src/components/Projects.astro` (linea 17)
 
@@ -110,5 +99,5 @@ Importante: ~90% del head es especifico de la home (title, description, canonica
 | ------------ | -------- |
 | Críticas     | 1        |
 | Importantes  | 2        |
-| Code Quality | 4        |
-| Menores      | 2        |
+| Code Quality | 3        |
+| Menores      | 1        |
