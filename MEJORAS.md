@@ -77,13 +77,18 @@ El SVG de WhatsApp (path de 40+ lineas) aparece 3 veces identico:
 
 ---
 
-### 7. No hay `src/layouts/`
+### 7. No hay `src/layouts/` + JSON-LD y meta de home hardcodeados
 
-**Archivo**: `src/pages/index.astro`
+**Archivos**: `src/pages/index.astro` (lineas 24-81) y `src/content/site.json`
 
-Todo esta hardcodeado en `index.astro`. Si se agrega una segunda pagina, se duplicaria el `<head>` completo.
+Dos problemas relacionados:
 
-**Solución**: Crear `src/layouts/BaseLayout.astro` con el `<head>`, `<Header />`, `<Footer />`.
+1. El `<head>` completo (compartido + especifico de pagina) esta hardcodeado en `index.astro`. Si se agrega una segunda pagina, se duplica el head compartido (charset, viewport, icon, theme-color, preconnects, fuentes, `<Analytics/>`, `<SpeedInsights/>`).
+2. El JSON-LD (lineas 56-78) y varios meta duplan datos que ya existen en `site.json` (name, address, phone, email, sameAs).
+
+Importante: ~90% del head es especifico de la home (title, description, canonical, OG, JSON-LD). Una segunda pagina necesita su propio meta, asi que el layout no puede absorber el `<head>` tal cual.
+
+**Solución**: (recomendada solo cuando exista una segunda pagina.) Crear `src/layouts/BaseLayout.astro` con el doctype, head compartido, `<Header/>` y `<Footer/>`, y un slot para el meta especifico de cada pagina (cada pagina aporta su propio title, description, canonical y OG). Ademas, derivar el JSON-LD desde `site.json` para eliminar la duplicacion.
 
 ---
 
@@ -99,39 +104,11 @@ Todo esta hardcodeado en `index.astro`. Si se agrega una segunda pagina, se dupl
 
 ---
 
-### 9. Links externos sin `referrerpolicy`
-
-**Archivos**: `Header.astro`, `Hero.astro`, `Footer.astro`, `Contact.astro`, `Location.astro`, `Videos.astro`
-
-Los 9 links con `target="_blank"` ya llevan `rel="noopener noreferrer"`, pero ninguno tiene `referrerpolicy` (0 ocurrencias en `src/`).
-
-**Solución**: Agregar `referrerpolicy="no-referrer-when-downgrade"` a todos los links externos (WhatsApp, YouTube, Instagram, Google Maps).
-
----
-
-### 10. Sección Ubicación sin subtitle
-
-**Archivo**: `src/components/Location.astro` (linea 8)
-
-`<Section title="Ubicación" />` sin subtitle, mientras todas las otras secciones tienen.
-
-**Solución**: Agregar un subtitle descriptivo (Camino a Melipilla, Padre Hurtado) o mantener la consistencia con las otras secciones.
-
----
-
-### 11. No hay `src/env.d.ts`
-
-Astro normalmente lo genera automaticamente, pero si se agregan tipos de assets personalizados, podria ser necesario.
-
-**Solución**: Crear `src/env.d.ts` con `/// <reference types="astro/client" />` si se planifica expandir el proyecto a multiples paginas.
-
----
-
 ## Resumen de impacto
 
-| Prioridad | Cantidad |
-|-----------|----------|
-| Críticas | 1 |
-| Importantes | 2 |
-| Code Quality | 4 |
-| Menores | 4 |
+| Prioridad    | Cantidad |
+| ------------ | -------- |
+| Críticas     | 1        |
+| Importantes  | 2        |
+| Code Quality | 4        |
+| Menores      | 2        |
