@@ -44,16 +44,6 @@ El script del carrusel (click en dots + swipe/drag) esta duplicado casi identico
 
 ---
 
-### 5. Duplicación: Services.astro y Products.astro
-
-**Archivos**: `src/components/Services.astro` y `src/components/Products.astro`
-
-Son estructuralmente identicos (mismo grid, mismo hover, mismo CTA "Contáctanos"). Solo cambian los nombres de props.
-
-**Solución**: Crear un componente `CardGrid.astro` reutilizable que reciba `items`, `title`, `ctaText`, `ctaHref` como props.
-
----
-
 ### 6. No hay `src/layouts/` + JSON-LD y meta de home hardcodeados
 
 **Archivos**: `src/pages/index.astro` (lineas 24-81) y `src/content/site.json`

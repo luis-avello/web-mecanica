@@ -3,8 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
-import Services from '../components/Services.astro';
-import Products from '../components/Products.astro';
+import CardGrid from '../components/CardGrid.astro';
 import Projects from '../components/Projects.astro';
 import Videos from '../components/Videos.astro';
 import Location from '../components/Location.astro';
@@ -84,8 +83,8 @@ import aboutData from '../content/about.json';
     <main>
       <Hero />
       <About title={aboutData.title} paragraphs={aboutData.paragraphs} galleryImages={aboutData.galleryImages} />
-      <Services services={servicesData} />
-      <Products products={productsData} />
+      <CardGrid id="servicios" title="Servicios" items={servicesData} />
+      <CardGrid id="productos" title="Productos" items={productsData} />
       <Projects projects={projectsData.projects} galleryImages={projectsData.galleryImages} />
       <Videos videos={videosData} />
       <Location />
