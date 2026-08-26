@@ -18,13 +18,36 @@ const { images = [], label = 'Foto', altPrefix = '' } = Astro.props;
       decoding="async"
       class="w-full h-full object-cover transition-opacity duration-300 select-none"
     />
+    {images.length > 1 && (
+      <>
+        <!-- Nav buttons -->
+        <button
+          data-nav="prev"
+          aria-label="Imagen anterior"
+          class="absolute top-1/2 -translate-y-1/2 left-3 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-black/50 hover:bg-black/70 text-white hover:text-red transition-colors cursor-pointer"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+          </svg>
+        </button>
+        <button
+          data-nav="next"
+          aria-label="Imagen siguiente"
+          class="absolute top-1/2 -translate-y-1/2 right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-black/50 hover:bg-black/70 text-white hover:text-red transition-colors cursor-pointer"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+          </svg>
+        </button>
+      </>
+    )}
   </div>
 
   <!-- Dots -->
   <div class="gallery-dots flex justify-center gap-2">
     {images.map((src, i) => (
       <button
-        class="w-2.5 h-2.5 rounded-full transition-all duration-300 bg-gray-dark hover:bg-gray"
+        class={i === 0 ? 'w-2.5 h-2.5 rounded-full transition-all duration-300 bg-red w-8' : 'w-2.5 h-2.5 rounded-full transition-all duration-300 bg-gray-dark hover:bg-gray'}
         data-index={i}
         data-src={src}
         aria-label={label + ' ' + (i + 1)}
@@ -62,6 +85,21 @@ const { images = [], label = 'Foto', altPrefix = '' } = Astro.props;
           updateGallery(parseInt(e.target.dataset.index));
         }
       });
+
+      const prevButton = gallery.querySelector('[data-nav="prev"]');
+      const nextButton = gallery.querySelector('[data-nav="next"]');
+
+      if (prevButton) {
+        prevButton.addEventListener('click', function() {
+          updateGallery(currentIndex === 0 ? images.length - 1 : currentIndex - 1);
+        });
+      }
+
+      if (nextButton) {
+        nextButton.addEventListener('click', function() {
+          updateGallery(currentIndex === images.length - 1 ? 0 : currentIndex + 1);
+        });
+      }
 
       let startX = 0;
       let isDragging = false;
