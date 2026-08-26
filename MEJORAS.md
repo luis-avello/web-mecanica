@@ -34,16 +34,6 @@ Funciona, pero es frágil y puede causar problemas en algunos servidores/configs
 
 ## Code Quality (limpieza y mantenibilidad)
 
-### 4. Duplicación masiva: Scripts de carrusel (~70 líneas)
-
-**Archivos**: `src/components/About.astro` (lineas 53-124) y `src/components/Projects.astro` (lineas 84-155)
-
-El script del carrusel (click en dots + swipe/drag) esta duplicado casi identico.
-
-**Solución**: Extraer a un componente reutilizable `Gallery.astro` que reciba `images`, `mainImageId`, `dotsId` como props.
-
----
-
 ### 6. No hay `src/layouts/` + JSON-LD y meta de home hardcodeados
 
 **Archivos**: `src/pages/index.astro` (lineas 24-81) y `src/content/site.json`
@@ -57,16 +47,3 @@ Importante: ~90% del head es especifico de la home (title, description, canonica
 
 **Solución**: (recomendada solo cuando exista una segunda pagina.) Crear `src/layouts/BaseLayout.astro` con el doctype, head compartido, `<Header/>` y `<Footer/>`, y un slot para el meta especifico de cada pagina (cada pagina aporta su propio title, description, canonical y OG). Ademas, derivar el JSON-LD desde `site.json` para eliminar la duplicacion.
 
----
-
-## Menores (pulido y detalles)
-
-### 7. About.astro y Projects.astro: `data-images` expone datos internos en el DOM
-
-**Archivos**: `src/components/About.astro` (linea 13) y `src/components/Projects.astro` (linea 17)
-
-`JSON.stringify(galleryImages)` se inyecta directamente en un atributo `data-images` del DOM. Si una imagen tiene comillas o caracteres especiales, podria romper el JSON.
-
-**Solución**: Leer las imagenes directamente del DOM, o pasarlas via un `<script type="application/json">` oculto.
-
----
