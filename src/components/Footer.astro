@@ -54,7 +54,16 @@ import IconMail from './icons/IconMail.astro';
 
     <!-- Bottom bar -->
     <div class="border-t border-gray-dark/20 mt-10 pt-6 text-center">
-      <p class="text-gray-dark text-xs">&copy; {new Date().getFullYear()} Mecánica Avello SPA. Todos los derechos reservados.</p>
+      <p class="text-gray-dark text-xs">&copy; <span id="footer-year">{new Date().getFullYear()}</span> Mecánica Avello SPA. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>
+
+<script client:load>
+(function() {
+  const yearEl = document.getElementById('footer-year');
+  if (yearEl) {
+    yearEl.textContent = String(new Date().getFullYear());
+  }
+})();
+</script>

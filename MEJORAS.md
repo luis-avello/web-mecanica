@@ -16,18 +16,6 @@ Ambos directorios contienen contenido solapado. Solo se necesitan en `public/` y
 
 ---
 
-## Importantes (mejoran UX, SEO o accesibilidad)
-
-### 2. Footer: `new Date().getFullYear()` en build time
-
-**Archivo**: `src/components/Footer.astro` (linea 60)
-
-El copyright se calcula en build time, no en runtime (no existe bloque `<script>` en el componente). Si el site se build en enero 2026, el footer dira 2026 incluso en 2027.
-
-**Solución**: Pequeño script `client:load` que actualice el año en runtime, o hardcodear el año y documentarlo.
-
----
-
 ### 3. Archivos con espacios en el filename
 
 **Alcance verificado** (no solo el logo):
@@ -92,12 +80,3 @@ Importante: ~90% del head es especifico de la home (title, description, canonica
 **Solución**: Leer las imagenes directamente del DOM, o pasarlas via un `<script type="application/json">` oculto.
 
 ---
-
-## Resumen de impacto
-
-| Prioridad    | Cantidad |
-| ------------ | -------- |
-| Críticas     | 1        |
-| Importantes  | 2        |
-| Code Quality | 3        |
-| Menores      | 1        |
